@@ -1,12 +1,12 @@
 import { initHeader } from "./components/header";
 import { initFooter } from "./components/footer";
-import { initTitle } from "./components/title";
+import { initText } from "./components/text";
 import { initForm } from "./components/form";
 import { initHomePage } from "./pages/home";
 function main() {
 	initHeader();
 	initFooter();
-	initTitle();
+	initText();
 	initForm();
 	const container = document.querySelector(".root");
 	initHomePage(container);

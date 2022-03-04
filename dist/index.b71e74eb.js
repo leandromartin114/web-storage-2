@@ -521,20 +521,20 @@ function hmrAcceptRun(bundle, id) {
 },{}],"h7u1C":[function(require,module,exports) {
 var _header = require("./components/header");
 var _footer = require("./components/footer");
-var _title = require("./components/title");
+var _text = require("./components/text");
 var _form = require("./components/form");
 var _home = require("./pages/home");
 function main() {
     _header.initHeader();
     _footer.initFooter();
-    _title.initTitle();
+    _text.initText();
     _form.initForm();
     const container = document.querySelector(".root");
     _home.initHomePage(container);
 }
 main();
 
-},{"./components/header":"6hCU4","./components/footer":"aoxsu","./pages/home":"l5Ogl","./components/form":"2s5qC","./components/title":"iClsj"}],"6hCU4":[function(require,module,exports) {
+},{"./components/header":"6hCU4","./components/footer":"aoxsu","./pages/home":"l5Ogl","./components/form":"2s5qC","./components/text":"6Xncd"}],"6hCU4":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initHeader", ()=>initHeader
@@ -630,7 +630,7 @@ parcelHelpers.export(exports, "initHomePage", ()=>initHomePage
 function initHomePage(container) {
     const div = document.createElement("div");
     div.innerHTML = `
-        <my-title>Mis pendientes</my-title>
+        <my-text tag="h1">Mis pendientes</my-text>
         <my-form></my-form>
     `;
     container.appendChild(div);
@@ -716,30 +716,57 @@ function initForm() {
     customElements.define("my-form", Form);
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iClsj":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6Xncd":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "initTitle", ()=>initTitle
+parcelHelpers.export(exports, "initText", ()=>initText
 );
-function initTitle() {
-    class Title extends HTMLElement {
+function initText() {
+    class Text extends HTMLElement {
         constructor(){
             super();
+            this.shadow = this.attachShadow({
+                mode: "open"
+            });
             this.text = this.textContent;
+            this.tags = [
+                "h1",
+                "h3",
+                "p"
+            ];
+            this.tag = "p";
+            if (this.tags.includes(this.getAttribute("tag"))) this.tag = this.getAttribute("tag") || this.tag;
             this.render();
         }
         render() {
-            this.innerHTML = `
-            <h1></h1>
-            `;
-            this.style.fontSize = "34px";
-            this.style.fontWeight = "700";
-            this.style.display = "flex";
-            this.style.alignItems = "center";
-            this.textContent = this.text;
+            const textEl = document.createElement(this.tag);
+            textEl.textContent = this.text;
+            const style = document.createElement("style");
+            style.innerHTML = `
+				h1{
+					font-size: 34px;
+					font-weight: 700;
+					display: flex;
+					align-items: center;
+				}
+				h3{
+					font-size: 22px;
+					font-weight: 500;
+					display: flex;
+					align-items: center;
+				}
+				p{
+					font-size: 18px;
+					font-weight: 400;
+					display: flex;
+					align-items: center;
+				}
+			`;
+            this.shadow.appendChild(textEl);
+            this.shadow.appendChild(style);
         }
     }
-    customElements.define("my-title", Title);
+    customElements.define("my-text", Text);
 }
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["8wcER","h7u1C"], "h7u1C", "parcelRequire9eb1")
