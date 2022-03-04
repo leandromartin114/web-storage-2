@@ -1,0 +1,1 @@
+{"mappings":"AAAA;AACA;AACA;AACA;AACA;AACA;AACA","sources":["src/index.css"],"sourcesContent":["* {\r\n\tbox-sizing: border-box;\r\n}\r\nbody {\r\n\tmargin: 0;\r\n\tfont-family: \"Poppins\", sans-serif;\r\n}\r\n"],"names":[],"version":3,"file":"index.61d3354a.css.map","sourceRoot":"/__parcel_source_root/"}
