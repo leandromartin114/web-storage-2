@@ -6,26 +6,23 @@ export function initForm() {
 			this.render();
 		}
 		shadow = this.attachShadow({ mode: "open" });
-		// connectedCallback() {
-		// 	const form = this.shadow.querySelector(".form") as HTMLFormElement;
-		// 	form.addEventListener("submit", (e) => {
-		// 		e.preventDefault();
-		// 		const data = e.target as any;
-		// 		state.addItem({
-		// 			id: () => {
-		// 				if (state.getState()) {
-		// 					const list = state.getState().list;
-		// 					return list.length;
-		// 				} else {
-		// 					return 0;
-		// 				}
-		// 			},
-		// 			complete: false,
-		// 			pending: data.pendiente.value,
-		// 		});
-		// 		form.reset();
-		// 	});
-		// }
+		connectedCallback() {
+			const form = this.shadow.querySelector(".form") as HTMLFormElement;
+			form.addEventListener("submit", (e) => {
+				e.preventDefault();
+				const data = e.target as any;
+				const newTask = {
+					id: Math.floor(Math.random() * 100),
+					title: data.title.value,
+					completed: false,
+					deleted: false,
+				};
+				state.addTask(newTask);
+				console.log(state.getState());
+
+				form.reset();
+			});
+		}
 		render() {
 			const div = document.createElement("div");
 			const style = document.createElement("style");
@@ -61,7 +58,7 @@ export function initForm() {
 			div.innerHTML = `
             <form class="form">
             <label class="label">Nuevo pendiente</label>
-            <input type="text" class="input" placeholder="Escribe un pendiente" name="pendiente">
+            <input type="text" class="input" placeholder="Escribe una tarea" name="title">
             <button class="button" type="submit">Agregar</button>
             </form>
             `;

@@ -1,5 +1,5 @@
 4832
-68C:\Users\leand\apx\dwf-m5\web-storage-2\src\components\item\index.ts132908084828844654 0
+68C:\Users\leand\apx\dwf-m5\web-storage-2\src\components\item\index.ts132913185775933107 0
 91C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\css-tree\lib\syntax\node\WhiteSpace.js132875136334670000 0
 83C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\@parcel\source-map\src\wasm.js132879447428820000 0
 106C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\caniuse-lite\data\features\comparedocumentposition.js132894990258759998 0
@@ -28,7 +28,7 @@
 102C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\caniuse-lite\data\features\css-backdrop-filter.js132894990258759998 0
 80C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\@parcel\transformer-svg\lib132908048360622178 1
 84C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\lmdb\dependencies\lz4\lib\lz4.c132908048333280000 0
-44C:\Users\leand\apx\dwf-m5\web-storage-2\dist132908864899758747 1
+44C:\Users\leand\apx\dwf-m5\web-storage-2\dist132913194953682508 1
 77C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\weak-lru-cache\README.md132882936751199998 0
 96C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\@parcel\reporter-cli\lib\CLIReporter.js.map132901073559560002 0
 73C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\posthtml-render\dist132908048361632255 1
@@ -73,7 +73,7 @@
 102C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\postcss-merge-longhand\types\lib\decl\margin.d.ts132908048335720002 0
 88C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\terser\node_modules\source-map\dist132908048362612328 1
 83C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\cosmiconfig\dist\Explorer.d.ts132875136370000000 0
-53C:\Users\leand\apx\dwf-m5\web-storage-2\src\index.css132908069896225316 0
+53C:\Users\leand\apx\dwf-m5\web-storage-2\src\index.css132911422493066216 0
 84C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\caniuse-lite\data\regions\VN.js132894990258759998 0
 57C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\.bin132908048374043194 1
 99C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\lmdb\prebuilds\linux-x64\node.abi93.glibc.node132908048333280000 0
@@ -86,10 +86,10 @@
 79C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\node-releases\package.json132891577265500000 0
 80C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\dom-serializer\node_modules132908048346866153 1
 90C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\@swc\helpers\src\_set_prototype_of.js132875136367650002 0
-54C:\Users\leand\apx\dwf-m5\web-storage-2\src\index.html132908864187660377 0
+54C:\Users\leand\apx\dwf-m5\web-storage-2\src\index.html132911447448133833 0
 62C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\nth-check132908048355371788 1
 95C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\@parcel\core\test\fixtures\invalid-engines132908048369352844 1
-52C:\Users\leand\apx\dwf-m5\web-storage-2\src\index.ts132908794499076377 0
+52C:\Users\leand\apx\dwf-m5\web-storage-2\src\index.ts132913149415571454 0
 67C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\lmdb\README.md132908048333280000 0
 98C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\caniuse-lite\data\features\mutation-events.js132894990258759998 0
 79C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\@parcel\runtime-js\LICENSE132901073595760000 0
@@ -99,7 +99,7 @@
 74C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\resolve-from\index.js132875136414710000 0
 95C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\postcss-normalize-display-values\README.md132908048337010000 0
 101C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\caniuse-lite\data\features\css-widows-orphans.js132894990258759998 0
-52C:\Users\leand\apx\dwf-m5\web-storage-2\src\state.ts132908075685281091 0
+52C:\Users\leand\apx\dwf-m5\web-storage-2\src\state.ts132913174683819392 0
 65C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\csso\LICENSE132875136334869998 0
 91C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\postcss-normalize-unicode\package.json132908048339189998 0
 80C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\css-tree\lib\lexer\trace.js132875136334670000 0
@@ -112,11 +112,11 @@
 72C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\@parcel\packager-js132908048354041680 1
 54C:\Users\leand\apx\dwf-m5\web-storage-2\src\pages\home132908052817058440 1
 70C:\Users\leand\apx\dwf-m5\web-storage-2\src\components\footer\index.ts132908057904048084 0
-63C:\Users\leand\apx\dwf-m5\web-storage-2\dist\index.61d3354a.css132908069897526919 0
+63C:\Users\leand\apx\dwf-m5\web-storage-2\dist\index.61d3354a.css132913150152855286 0
 69C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\stable\README.md132875136336010000 0
 67C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\yaml\util.d.ts132875136340190000 0
 128C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\@parcel\source-map\parcel_sourcemap_node\artifacts\index.linux-x64-gnu.node132879447428820000 0
-63C:\Users\leand\apx\dwf-m5\web-storage-2\src\pages\home\index.ts132908864898788616 0
+63C:\Users\leand\apx\dwf-m5\web-storage-2\src\pages\home\index.ts132913195687922343 0
 80C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\cosmiconfig\dist\index.d.ts132875136370000000 0
 85C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\nanoid\url-alphabet\package.json132901073636650000 0
 74C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\postcss-discard-empty132908048355671806 1
@@ -159,7 +159,7 @@
 99C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\postcss-ordered-values\types\lib\getValue.d.ts132908048338430000 0
 88C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\@parcel\core\test\fixtures\main-mjs132908048369412843 1
 94C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\@parcel\reporter-dev-server\src\Server.js132901073572220000 0
-68C:\Users\leand\apx\dwf-m5\web-storage-2\src\components\text\index.ts132908862719318760 0
+68C:\Users\leand\apx\dwf-m5\web-storage-2\src\components\text\index.ts132911422139657308 0
 82C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\source-map-support\LICENSE.md132875136343570002 0
 75C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\postcss\lib\at-rule.js132908048332060002 0
 100C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\postcss-normalize-repeat-style\types\index.d.ts132908048337840000 0
@@ -171,7 +171,7 @@
 106C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\@parcel\transformer-js\parcel-swc.win32-x64-msvc.node132901073606060000 0
 107C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\postcss-ordered-values\types\lib\vendorUnprefixed.d.ts132908048338430000 0
 88C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\postcss-ordered-values\src\index.js132908048338430000 0
-68C:\Users\leand\apx\dwf-m5\web-storage-2\src\components\form\index.ts132908085112219056 0
+68C:\Users\leand\apx\dwf-m5\web-storage-2\src\components\form\index.ts132913175893812372 0
 80C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\css-select\lib\general.d.ts132875136333670002 0
 77C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\stylehacks\src\exists.js132908048340210000 0
 96C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\@parcel\core\node_modules\.bin\browserslist132908048370462914 0
@@ -4827,7 +4827,7 @@
 66C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\.bin\svgo.cmd132908048373953176 0
 64C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\.bin\terser132908048373993184 0
 68C:\Users\leand\apx\dwf-m5\web-storage-2\node_modules\.bin\terser.cmd132908048373993184 0
-67C:\Users\leand\apx\dwf-m5\web-storage-2\dist\index.61d3354a.css.map132908069897526919 0
-62C:\Users\leand\apx\dwf-m5\web-storage-2\dist\index.b71e74eb.js132908864899718747 0
-66C:\Users\leand\apx\dwf-m5\web-storage-2\dist\index.b71e74eb.js.map132908864899738743 0
-55C:\Users\leand\apx\dwf-m5\web-storage-2\dist\index.html132908864188570553 0
+67C:\Users\leand\apx\dwf-m5\web-storage-2\dist\index.61d3354a.css.map132913150152875295 0
+62C:\Users\leand\apx\dwf-m5\web-storage-2\dist\index.b71e74eb.js132913194953632504 0
+66C:\Users\leand\apx\dwf-m5\web-storage-2\dist\index.b71e74eb.js.map132913194953652521 0
+55C:\Users\leand\apx\dwf-m5\web-storage-2\dist\index.html132913150153852220 0

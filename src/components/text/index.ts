@@ -21,18 +21,21 @@ export function initText() {
 					font-weight: 700;
 					display: flex;
 					align-items: center;
+					margin: 10px;
 				}
 				h3{
 					font-size: 22px;
 					font-weight: 500;
 					display: flex;
 					align-items: center;
+					margin: 0;
 				}
 				p{
 					font-size: 18px;
 					font-weight: 400;
 					display: flex;
 					align-items: center;
+					margin: 0;
 				}
 			`;
 			this.shadow.appendChild(textEl);

@@ -524,17 +524,19 @@ var _footer = require("./components/footer");
 var _text = require("./components/text");
 var _form = require("./components/form");
 var _home = require("./pages/home");
+var _item = require("./components/item");
 function main() {
     _header.initHeader();
     _footer.initFooter();
     _text.initText();
     _form.initForm();
+    _item.initItem();
     const container = document.querySelector(".root");
     _home.initHomePage(container);
 }
 main();
 
-},{"./components/header":"6hCU4","./components/footer":"aoxsu","./pages/home":"l5Ogl","./components/form":"2s5qC","./components/text":"6Xncd"}],"6hCU4":[function(require,module,exports) {
+},{"./components/header":"6hCU4","./components/footer":"aoxsu","./pages/home":"l5Ogl","./components/form":"2s5qC","./components/text":"6Xncd","./components/item":"2kMdO"}],"6hCU4":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initHeader", ()=>initHeader
@@ -627,20 +629,122 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initHomePage", ()=>initHomePage
 );
+var _state = require("../../state");
 function initHomePage(container) {
     const div = document.createElement("div");
     div.innerHTML = `
-        <my-text tag="h1">Mis pendientes</my-text>
-        <my-form></my-form>
-    `;
+		<my-text tag="h1">Mis pendientes</my-text>
+		<my-form></my-form>
+		<ul class="list"></ul>
+	`;
+    const list = div.querySelector(".list");
+    const tasks = _state.state.getEnabledTasks();
+    const style = document.createElement("style");
+    style.innerHTML = `
+			.list{
+				margin: 0;
+				padding: 0;
+			}
+	`;
+    container.firstChild?.remove();
     container.appendChild(div);
+    container.appendChild(style);
+    function render(items) {
+        list.innerHTML = "";
+        for (const i of items){
+            const myItem = document.createElement("my-item");
+            myItem.setAttribute("title", i.title);
+            myItem.setAttribute("id", i.id);
+            if (i.completed) myItem.setAttribute("checked", "true");
+            myItem.addEventListener("change", (e)=>{
+                _state.state.changeCompleted(e.detail.id, e.detail.value);
+            });
+            list.appendChild(myItem);
+        }
+    //LOGARITMO ORIGINAL PARA DIBUJAR UN "my-item" DENTRO DE LA PÁGINA
+    // const listOfTasks = tasks.map(
+    // 	(t) =>
+    // 		`<my-item title="${t.title}" ${
+    // 			t.completed ? "checked" : ""
+    // 		} ></my-item>`
+    // );
+    // list.innerHTML = listOfTasks.join("");
+    }
+    _state.state.subscribe(()=>{
+        render(_state.state.getEnabledTasks());
+    });
+    render(tasks);
 }
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../../state":"1Yeju"}],"1Yeju":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "state", ()=>state
+);
+const state = {
+    data: {
+        tasks: [
+            {
+                id: 1,
+                title: "Primera tarea",
+                completed: true,
+                deleted: false
+            },
+            {
+                id: 2,
+                title: "Segunda tarea",
+                completed: false,
+                deleted: false
+            },
+            {
+                id: 3,
+                title: "Tercera tarea",
+                completed: false,
+                deleted: true
+            }, 
+        ]
+    },
+    listeners: [],
+    initState () {
+    },
+    getState () {
+        return this.data;
+    },
+    getEnabledTasks () {
+        const tasks = this.getState().tasks;
+        return tasks.filter((t)=>{
+            return t.deleted == false;
+        });
+    },
+    setState (newState) {
+        this.data = newState;
+        for (const cb of this.listeners)cb(newState);
+    // const stateString = JSON.stringify(newState);
+    // localStorage.setItem("saved-state", stateString);
+    },
+    subscribe (callback) {
+        this.listeners.push(callback);
+    },
+    addTask (task) {
+        const currentState = this.getState();
+        currentState.tasks.push(task);
+        this.setState(currentState);
+    },
+    changeCompleted (id, value) {
+        const currentState = this.getState();
+        const foundedTask = currentState.tasks.find((t)=>t.id == id
+        );
+        foundedTask.completed = value;
+        this.setState(currentState);
+    }
+};
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2s5qC":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initForm", ()=>initForm
 );
+var _state = require("../../state");
 function initForm() {
     class Form extends HTMLElement {
         constructor(){
@@ -650,26 +754,22 @@ function initForm() {
             });
             this.render();
         }
-        // connectedCallback() {
-        // 	const form = this.shadow.querySelector(".form") as HTMLFormElement;
-        // 	form.addEventListener("submit", (e) => {
-        // 		e.preventDefault();
-        // 		const data = e.target as any;
-        // 		state.addItem({
-        // 			id: () => {
-        // 				if (state.getState()) {
-        // 					const list = state.getState().list;
-        // 					return list.length;
-        // 				} else {
-        // 					return 0;
-        // 				}
-        // 			},
-        // 			complete: false,
-        // 			pending: data.pendiente.value,
-        // 		});
-        // 		form.reset();
-        // 	});
-        // }
+        connectedCallback() {
+            const form = this.shadow.querySelector(".form");
+            form.addEventListener("submit", (e)=>{
+                e.preventDefault();
+                const data = e.target;
+                const newTask = {
+                    id: Math.floor(Math.random() * 100),
+                    title: data.title.value,
+                    completed: false,
+                    deleted: false
+                };
+                _state.state.addTask(newTask);
+                console.log(_state.state.getState());
+                form.reset();
+            });
+        }
         render() {
             const div = document.createElement("div");
             const style = document.createElement("style");
@@ -705,7 +805,7 @@ function initForm() {
             div.innerHTML = `
             <form class="form">
             <label class="label">Nuevo pendiente</label>
-            <input type="text" class="input" placeholder="Escribe un pendiente" name="pendiente">
+            <input type="text" class="input" placeholder="Escribe una tarea" name="title">
             <button class="button" type="submit">Agregar</button>
             </form>
             `;
@@ -716,7 +816,7 @@ function initForm() {
     customElements.define("my-form", Form);
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6Xncd":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../../state":"1Yeju"}],"6Xncd":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initText", ()=>initText
@@ -748,18 +848,21 @@ function initText() {
 					font-weight: 700;
 					display: flex;
 					align-items: center;
+					margin: 10px;
 				}
 				h3{
 					font-size: 22px;
 					font-weight: 500;
 					display: flex;
 					align-items: center;
+					margin: 0;
 				}
 				p{
 					font-size: 18px;
 					font-weight: 400;
 					display: flex;
 					align-items: center;
+					margin: 0;
 				}
 			`;
             this.shadow.appendChild(textEl);
@@ -767,6 +870,103 @@ function initText() {
         }
     }
     customElements.define("my-text", Text);
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2kMdO":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "initItem", ()=>initItem
+);
+function initItem() {
+    class Item extends HTMLElement {
+        constructor(){
+            super();
+            this.shadow = this.attachShadow({
+                mode: "open"
+            });
+        }
+        connectedCallback() {
+            this.title = this.getAttribute("title") || "";
+            this.checked = this.hasAttribute("checked");
+            this.id = this.getAttribute("id");
+            this.render();
+        }
+        addListeners() {
+            const checkEl = this.shadow.querySelector(".checkbox");
+            checkEl.addEventListener("click", (e)=>{
+                const target = e.target;
+                const myEvent = new CustomEvent("change", {
+                    detail: {
+                        id: this.id,
+                        value: target.checked
+                    }
+                });
+                this.dispatchEvent(myEvent);
+            });
+        }
+        render() {
+            const div = document.createElement("div");
+            div.classList.add("card");
+            const style = document.createElement("style");
+            div.innerHTML = `
+				<h4 class="text ${this.checked ? "checked" : ""}">${this.title}</h4>
+				<div class="icons">
+					<input type="checkbox" class="checkbox" ${this.checked ? "checked" : ""}>
+					<button class="delete">E</button>
+				</div>
+			`;
+            style.innerHTML = `
+			.card {
+                display: flex;
+                border: 4px dashed #9CBBE9;
+				border-radius: 4px;
+                padding: 10px;
+				margin-top: 15px;
+				max-width: 352px;
+				box-sizing: border-box;
+            }
+			.checkbox {
+				border: 2px solid black;
+				border-radius: 4px;
+                width: 40px;
+                height: 40px;
+			}
+            .text {
+                font-size: 18px;
+                margin: 0;
+                font-weight: 500;
+                width: 100%;
+            }
+			.checked{
+				text-decoration: line-through;
+			}
+            .delete {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 18px;
+                font-weight: 700;
+                border: none;
+				border-radius: 4px;
+                background-color: #9CBBE9;
+                width: 40px;
+                height: 40px;
+                margin: 0;
+                padding: 0;
+			}
+            .icons{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-between;
+            }
+			`;
+            this.shadow.appendChild(div);
+            this.shadow.appendChild(style);
+            this.addListeners();
+        }
+    }
+    customElements.define("my-item", Item);
 }
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["8wcER","h7u1C"], "h7u1C", "parcelRequire9eb1")
