@@ -13,5 +13,6 @@ function main() {
 	initItem();
 	const container = document.querySelector(".root");
 	initHomePage(container);
+	state.initState();
 }
 main();

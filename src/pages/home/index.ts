@@ -7,7 +7,6 @@ export function initHomePage(container: Element) {
 		<ul class="list"></ul>
 	`;
 	const list = div.querySelector(".list");
-	const tasks = state.getEnabledTasks();
 	const style = document.createElement("style");
 	style.innerHTML = `
 			.list{
@@ -20,18 +19,24 @@ export function initHomePage(container: Element) {
 	container.appendChild(style);
 	function render(items) {
 		list.innerHTML = "";
+
 		for (const i of items) {
-			const myItem = document.createElement("my-item");
-			myItem.setAttribute("title", i.title);
-			myItem.setAttribute("id", i.id);
-			if (i.completed) {
-				myItem.setAttribute("checked", "true");
+			if (items.length == 1 && i.title == "Tarea piloto") {
+				list.innerHTML = `<my-text tag="h3">Sin pendientes</my-text>`;
+			} else {
+				const myItem = document.createElement("my-item");
+				myItem.setAttribute("title", i.title);
+				myItem.setAttribute("id", i.id);
+				if (i.completed) {
+					myItem.setAttribute("checked", "true");
+				}
+				myItem.addEventListener("change", (e: any) => {
+					state.changeCompleted(e.detail.id, e.detail.value);
+				});
+				list.appendChild(myItem);
 			}
-			myItem.addEventListener("change", (e: any) => {
-				state.changeCompleted(e.detail.id, e.detail.value);
-			});
-			list.appendChild(myItem);
 		}
+
 		//LOGARITMO ORIGINAL PARA DIBUJAR UN "my-item" DENTRO DE LA PÁGINA
 		// const listOfTasks = tasks.map(
 		// 	(t) =>
@@ -44,5 +49,5 @@ export function initHomePage(container: Element) {
 	state.subscribe(() => {
 		render(state.getEnabledTasks());
 	});
-	render(tasks);
+	render(state.getEnabledTasks());
 }

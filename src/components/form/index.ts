@@ -12,7 +12,7 @@ export function initForm() {
 				e.preventDefault();
 				const data = e.target as any;
 				const newTask = {
-					id: Math.floor(Math.random() * 100),
+					id: state.getState().tasks?.length || 0,
 					title: data.title.value,
 					completed: false,
 					deleted: false,

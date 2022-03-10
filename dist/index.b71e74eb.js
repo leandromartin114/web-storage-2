@@ -525,6 +525,7 @@ var _text = require("./components/text");
 var _form = require("./components/form");
 var _home = require("./pages/home");
 var _item = require("./components/item");
+var _state = require("./state");
 function main() {
     _header.initHeader();
     _footer.initFooter();
@@ -533,10 +534,11 @@ function main() {
     _item.initItem();
     const container = document.querySelector(".root");
     _home.initHomePage(container);
+    _state.state.initState();
 }
 main();
 
-},{"./components/header":"6hCU4","./components/footer":"aoxsu","./pages/home":"l5Ogl","./components/form":"2s5qC","./components/text":"6Xncd","./components/item":"2kMdO"}],"6hCU4":[function(require,module,exports) {
+},{"./components/header":"6hCU4","./components/footer":"aoxsu","./pages/home":"l5Ogl","./components/form":"2s5qC","./components/text":"6Xncd","./components/item":"2kMdO","./state":"1Yeju"}],"6hCU4":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initHeader", ()=>initHeader
@@ -638,7 +640,6 @@ function initHomePage(container) {
 		<ul class="list"></ul>
 	`;
     const list = div.querySelector(".list");
-    const tasks = _state.state.getEnabledTasks();
     const style = document.createElement("style");
     style.innerHTML = `
 			.list{
@@ -651,7 +652,8 @@ function initHomePage(container) {
     container.appendChild(style);
     function render(items) {
         list.innerHTML = "";
-        for (const i of items){
+        for (const i of items)if (items.length == 1 && i.title == "Tarea piloto") list.innerHTML = `<my-text tag="h3">Sin pendientes</my-text>`;
+        else {
             const myItem = document.createElement("my-item");
             myItem.setAttribute("title", i.title);
             myItem.setAttribute("id", i.id);
@@ -673,7 +675,7 @@ function initHomePage(container) {
     _state.state.subscribe(()=>{
         render(_state.state.getEnabledTasks());
     });
-    render(tasks);
+    render(_state.state.getEnabledTasks());
 }
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../../state":"1Yeju"}],"1Yeju":[function(require,module,exports) {
@@ -683,29 +685,29 @@ parcelHelpers.export(exports, "state", ()=>state
 );
 const state = {
     data: {
-        tasks: [
-            {
-                id: 1,
-                title: "Primera tarea",
-                completed: true,
-                deleted: false
-            },
-            {
-                id: 2,
-                title: "Segunda tarea",
-                completed: false,
-                deleted: false
-            },
-            {
-                id: 3,
-                title: "Tercera tarea",
-                completed: false,
-                deleted: true
-            }, 
-        ]
+        tasks: []
     },
     listeners: [],
     initState () {
+        const savedState = localStorage.getItem("saved-state");
+        const savedStateParsed = JSON.parse(savedState);
+        const pilotState = {
+            tasks: [
+                {
+                    id: 0,
+                    title: "Tarea piloto",
+                    completed: false,
+                    deleted: true
+                }, 
+            ]
+        };
+        if (savedStateParsed) {
+            console.log("hay state");
+            this.setState(savedStateParsed);
+        } else {
+            console.log("no hay state");
+            this.setState(pilotState);
+        }
     },
     getState () {
         return this.data;
@@ -719,8 +721,8 @@ const state = {
     setState (newState) {
         this.data = newState;
         for (const cb of this.listeners)cb(newState);
-    // const stateString = JSON.stringify(newState);
-    // localStorage.setItem("saved-state", stateString);
+        const stateString = JSON.stringify(newState);
+        localStorage.setItem("saved-state", stateString);
     },
     subscribe (callback) {
         this.listeners.push(callback);
@@ -760,7 +762,7 @@ function initForm() {
                 e.preventDefault();
                 const data = e.target;
                 const newTask = {
-                    id: Math.floor(Math.random() * 100),
+                    id: _state.state.getState().tasks?.length || 0,
                     title: data.title.value,
                     completed: false,
                     deleted: false
