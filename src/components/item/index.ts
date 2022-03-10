@@ -24,6 +24,13 @@ export function initItem() {
 				});
 				this.dispatchEvent(myEvent);
 			});
+			const deleteEl = this.shadow.querySelector(".delete");
+			deleteEl.addEventListener("click", () => {
+				const myEvent = new CustomEvent("delete", {
+					detail: { id: this.id },
+				});
+				this.dispatchEvent(myEvent);
+			});
 		}
 		render() {
 			const div = document.createElement("div");

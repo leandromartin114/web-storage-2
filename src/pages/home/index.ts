@@ -33,6 +33,9 @@ export function initHomePage(container: Element) {
 				myItem.addEventListener("change", (e: any) => {
 					state.changeCompleted(e.detail.id, e.detail.value);
 				});
+				myItem.addEventListener("delete", (e: any) => {
+					state.deleteTasks(e.detail.id);
+				});
 				list.appendChild(myItem);
 			}
 		}

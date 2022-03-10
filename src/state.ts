@@ -51,8 +51,14 @@ const state = {
 	},
 	changeCompleted(id, value) {
 		const currentState = this.getState();
-		const foundedTask = currentState.tasks.find((t) => t.id == id);
-		foundedTask.completed = value;
+		const foundTask = currentState.tasks.find((t) => t.id == id);
+		foundTask.completed = value;
+		this.setState(currentState);
+	},
+	deleteTasks(id) {
+		const currentState = this.getState();
+		const foundTask = currentState.tasks.find((t) => t.id == id);
+		foundTask.deleted = true;
 		this.setState(currentState);
 	},
 };

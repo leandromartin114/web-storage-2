@@ -661,6 +661,9 @@ function initHomePage(container) {
             myItem.addEventListener("change", (e)=>{
                 _state.state.changeCompleted(e.detail.id, e.detail.value);
             });
+            myItem.addEventListener("delete", (e)=>{
+                _state.state.deleteTasks(e.detail.id);
+            });
             list.appendChild(myItem);
         }
     //LOGARITMO ORIGINAL PARA DIBUJAR UN "my-item" DENTRO DE LA PÁGINA
@@ -734,9 +737,16 @@ const state = {
     },
     changeCompleted (id, value) {
         const currentState = this.getState();
-        const foundedTask = currentState.tasks.find((t)=>t.id == id
+        const foundTask = currentState.tasks.find((t)=>t.id == id
         );
-        foundedTask.completed = value;
+        foundTask.completed = value;
+        this.setState(currentState);
+    },
+    deleteTasks (id) {
+        const currentState = this.getState();
+        const foundTask = currentState.tasks.find((t)=>t.id == id
+        );
+        foundTask.deleted = true;
         this.setState(currentState);
     }
 };
@@ -901,6 +911,15 @@ function initItem() {
                     detail: {
                         id: this.id,
                         value: target.checked
+                    }
+                });
+                this.dispatchEvent(myEvent);
+            });
+            const deleteEl = this.shadow.querySelector(".delete");
+            deleteEl.addEventListener("click", ()=>{
+                const myEvent = new CustomEvent("delete", {
+                    detail: {
+                        id: this.id
                     }
                 });
                 this.dispatchEvent(myEvent);
